@@ -1,7 +1,13 @@
+
+
+/**
+ * 欢迎页
+ */
 @Entry
 @Component
 struct Index {
-  @State message: string = 'Hello World';
+  @State message: string = 'Hello World';//装饰器和ui相关
+
 
   build() {
     RelativeContainer() {
