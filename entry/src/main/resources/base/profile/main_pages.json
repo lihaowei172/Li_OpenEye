@@ -1,6 +1,10 @@
 {
   "src": [
     "pages/MainPage",
-    "pages/Splash"
+    "pages/Splash",
+    "pages/home/HomePage",
+    "pages/find/FindPage",
+    "pages/hot/HotPage",
+    "pages/mine/MinePage"
   ]
 }
