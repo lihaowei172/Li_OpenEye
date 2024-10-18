@@ -22,11 +22,11 @@ export struct  StateComponent{
   build() {
     Stack(){
       //判断页面状态，如果不是成功
-      if (this.viewState!=ViewStateConstant.VIEW_STATE_SUCCESS){
-        this.holdContent()
-      }else{
+      // if (this.viewState!=ViewStateConstant.VIEW_STATE_SUCCESS){
+      //   this.holdContent()
+      // }else{
         this.viewContent()
-      }
+      // }
     }
   }
 

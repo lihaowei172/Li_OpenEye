@@ -1,6 +1,10 @@
+import { getHomeListAxios } from '../http/apiService';
+import { HomeModelIssueListItemList } from '../model/HomeModel';
 
+import { BaseViewModel, ResultCallback } from './BaseViewModel';
+import { CommonType } from '../model/typeAlias/TypeAlias';
 
-export class HomeViewModel  {
+export class HomeViewModel extends BaseViewModel{
   private date: string = ""
 
   revertDate() {
@@ -16,25 +20,25 @@ export class HomeViewModel  {
    * @param stateCallback  状态返回
    * @param resultCallback  结果返回
    */
-  // async getHomeList(resultCallback?: ResultCallback<HomeModelIssueListItemList[]>) {
-  //   await this.httpRequest()
-  //     .promise(getHomeListAxios(this.date), this.date == "" ? true : false)
-  //     .then(result => {
-  //       let items = result.issueList[0].itemList
-  //       let list = items.filter((item) => item.type == "video")
-  //       if (this.date == "") {
-  //         let bannerList: HomeModelIssueListItemList[]
-  //         let bannerBean: HomeModelIssueListItemList = {}
-  //         bannerList = items.filter((item) => item.type == "banner2")
-  //         if (bannerList.length > 0) {
-  //           bannerBean = { bannerList: bannerList, type: "banner" }
-  //           list.unshift(bannerBean)
-  //         }
-  //       }
-  //       resultCallback?.(list)
-  //       this.spliteDate(result.nextPageUrl)
-  //     })
-  // }
+  async getHomeList(resultCallback?: ResultCallback<HomeModelIssueListItemList[]>) {
+    await this.httpRequest()
+      .promise(getHomeListAxios(this.date), this.date == "" ? true : false)
+      .then(result => {
+        let items = result.issueList[0].itemList
+        let list = items.filter((item) => item.type == "video")
+        if (this.date == "") {
+          let bannerList: HomeModelIssueListItemList[]
+          let bannerBean: HomeModelIssueListItemList = {}
+          bannerList = items.filter((item) => item.type == "banner2")
+          if (bannerList.length > 0) {
+            bannerBean = { bannerList: bannerList, type: "banner" }
+            list.unshift(bannerBean)
+          }
+        }
+        resultCallback?.(list)
+        this.spliteDate(result.nextPageUrl)
+      })
+  }
 
   private spliteDate(nextUrl: string) {
     let split = nextUrl.split("?");
