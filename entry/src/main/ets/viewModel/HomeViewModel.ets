@@ -22,18 +22,17 @@ export class HomeViewModel extends BaseViewModel{
    */
   async getHomeList(resultCallback?: ResultCallback<HomeModelIssueListItemList[]>) {
     await this.httpRequest()
-      .promise(getHomeListAxios(this.date), this.date == "" ? true : false)
+      .promise(getHomeListAxios())
       .then(result => {
         let items = result.issueList[0].itemList
         let list = items.filter((item) => item.type == "video")
-        if (this.date == "") {
+
           let bannerList: HomeModelIssueListItemList[]
           let bannerBean: HomeModelIssueListItemList = {}
           bannerList = items.filter((item) => item.type == "banner2")
           if (bannerList.length > 0) {
             bannerBean = { bannerList: bannerList, type: "banner" }
             list.unshift(bannerBean)
-          }
         }
         resultCallback?.(list)
         this.spliteDate(result.nextPageUrl)

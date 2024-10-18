@@ -38,6 +38,7 @@ export  struct HomePage {
     HomeViewModel.getHomeList((result)=>{
       this.dataList=result
       console.log("tatata",JSON.stringify(result))
+
     })
   }
   homeDemo(){
